@@ -10,6 +10,16 @@ Find all elements in the DOM.
 npm install document-all
 ```
 
+## API Options
+
+```js
+  let options = {
+    maxDepth: number, // Max depth to search ShadowDom or Iframes (default: Infinity)
+    propertyKey: string, // The property to traverse down, typically 'children' or 'childNodes'
+    filter: function(elem) : boolean // A function to control the depth search
+  }
+```
+
 ## API
 
 ### `findAllNodes`

@@ -47,10 +47,10 @@ export function findAllElements (container, options) {
  * @template [T=Array<Node>]
  * @param {ElementsContainer | NodesContainer} container
  * @param {options} options
- * @param {number} shadowRootDepth
+ * @param {number} depth
  * @return {T}
  */
-function walk (container, options, shadowRootDepth = 0) {
+function walk (container, options, depth = 0) {
   /**
    * @type {Array<Node>}
    */
@@ -69,23 +69,23 @@ function walk (container, options, shadowRootDepth = 0) {
   const children = Array.from(container[options.propertyKey])
 
   if ("shadowRoot" in container && container.shadowRoot) {
-    if (shadowRootDepth < options.maxDepth) {
-      shadowRootDepth++
+    if (depth < options.maxDepth) {
+      depth++
 
-      nodes = nodes.concat(walk(container.shadowRoot, options, shadowRootDepth))
+      nodes = nodes.concat(walk(container.shadowRoot, options, depth))
     }
   }
 
   if ("contentDocument" in container && container.contentDocument) {
-    if (shadowRootDepth < options.maxDepth) {
-      shadowRootDepth++;
+    if (depth < options.maxDepth) {
+      depth++;
 
-      nodes = nodes.concat(walk(container.contentDocument.documentElement, options, shadowRootDepth));
+      nodes = nodes.concat(walk(container.contentDocument.documentElement, options, depth));
     }
   }
 
   children.forEach((node) => {
-    nodes = nodes.concat(walk(node, options, shadowRootDepth))
+    nodes = nodes.concat(walk(node, options, depth))
   })
 
 
