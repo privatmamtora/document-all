@@ -2,7 +2,7 @@
 
 /**
  * @typedef {Element | DocumentFragment | ShadowRoot | Node} NodesContainer
- * @typedef {Document | DocumentFragment | ShadowRoot | Element} ElementsContainer
+ * @typedef {Document | DocumentFragment | ShadowRoot | Element | HTMLIFrameElement} ElementsContainer
  */
 
 /**
@@ -73,6 +73,14 @@ function walk (container, options, shadowRootDepth = 0) {
       shadowRootDepth++
 
       nodes = nodes.concat(walk(container.shadowRoot, options, shadowRootDepth))
+    }
+  }
+
+  if ("contentDocument" in container && container.contentDocument) {
+    if (shadowRootDepth < options.maxDepth) {
+      shadowRootDepth++;
+
+      nodes = nodes.concat(walk(container.contentDocument.documentElement, options, shadowRootDepth));
     }
   }
 
