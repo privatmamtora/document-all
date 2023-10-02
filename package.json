@@ -1,6 +1,6 @@
 {
   "name": "document-all",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "./exports/index.js",
   "module": "./exports/index.js",
   "types": "./exports/index.d.ts",
@@ -25,7 +25,7 @@
     "test": "web-test-runner"
   },
   "keywords": [
-    "document-all"
+    "document","all", "walk", "DOM"
   ],
   "license": "MIT",
   "repository": "git@github.com:privatmamtora/document-all.git",

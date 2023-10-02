@@ -1,8 +1,7 @@
-## 1.0.4
+## 1.0.1
 
-- fix: add "Document" as a possible container.
+- Fix readme
 
+## 1.0.0
 
-## 1.0.2
-
-- Fixed bad exports
+- First version

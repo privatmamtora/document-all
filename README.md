@@ -1,11 +1,13 @@
 # Purpose
 
-Sometimes you just wanna walk the DOM and find all the shadow roots and everything in the shadow roots
+Find all elements in the DOM.
+- Includes ShadowDom support
+- Includes Iframe/Frame support
 
 ## Getting Started
 
 ```js
-npm install shadow-dom-walk
+npm install document-all
 ```
 
 ## API
@@ -13,29 +15,31 @@ npm install shadow-dom-walk
 ### `findAllNodes`
 
 ```js
-import { findAllNodes } from 'shadow-dom-walk'
+import { findAllNodes } from 'document-all'
 
 // Max number of shadow roots to go down. Default is Infinity.
-const maxShadowRootDepth = 3
+let options = {}
+options.maxDepth = 3;
 
 // Container can be any Node
 const container = document
 
-findAllNodes(document, maxShadowRootDepth)
+findAllNodes(document, options)
 ```
 
 ### `findAllElements`
 
 ```js
-import { findAllElements } from 'shadow-dom-walk'
+import { findAllElements } from 'document-all'
 
 // Max number of shadow roots to go down. Default is Infinity.
-const maxShadowRootDepth = 3
+let options = {}
+options.maxDepth = 3;
 
 // Container can be any Element, DocumentFragment, or ShadowRoot
 const container = document
 
-findAllElements(document, maxShadowRootDepth)
+findAllElements(document, options)
 ```
 
 ## Element / Node Order
