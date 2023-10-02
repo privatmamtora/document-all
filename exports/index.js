@@ -11,10 +11,13 @@
  * @property {string} [propertyKey="children"]
  * @property {function(ElementsContainer | NodesContainer): boolean}  [filter]
  */
-const defaultOptions = {
-  maxDepth: Infinity, 
-  propertyKey: 'children'
-};
+
+function getDefaultOptions() {
+  return {
+    maxDepth: Infinity, 
+    propertyKey: 'children'
+  }
+}
 
 /**
  * @param {NodesContainer} container
@@ -22,8 +25,9 @@ const defaultOptions = {
  * @return {Node[]}
  */
 export function findAllNodes (container, options) {
+  let defaultOptions = getDefaultOptions();
   defaultOptions.propertyKey = 'childNodes';
-  return walk(container, Object.assign(defaultOptions, options));
+  return walk(container, Object.assign({}, defaultOptions, options));
 }
 
 /**
@@ -32,7 +36,8 @@ export function findAllNodes (container, options) {
  * @return {Array<ElementsContainer>}
  */
 export function findAllElements (container, options) {
-  return walk(container, Object.assign(defaultOptions, options));
+  let defaultOptions = getDefaultOptions();
+  return walk(container, Object.assign({}, defaultOptions, options));
 }
 
 // Private
