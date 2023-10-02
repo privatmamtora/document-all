@@ -28,12 +28,12 @@ test("Should grab all nodes 3 levels deep", async () => {
   assert.equal(findAllNodes(el).length, 12)
 })
 
-test("Should grab the number of elements based on max shadow depth", async () => {
+test("Should grab the number of nodes based on max shadow depth", async () => {
   const el = await fixture("<shadow-root-3></shadow-root-3>")
 
-  assert.equal(findAllNodes(el, 1).length, 4)
-  assert.equal(findAllNodes(el, 2).length, 9)
-  assert.equal(findAllNodes(el, 3).length, 12)
+  assert.equal(findAllNodes(el, { maxDepth:1}).length, 4)
+  assert.equal(findAllNodes(el, { maxDepth:2}).length, 9)
+  assert.equal(findAllNodes(el, { maxDepth:3}).length, 12)
 })
 
 // Find all elements
@@ -62,20 +62,18 @@ test("Should grab all elements 3 levels deep", async () => {
 test("Should grab the number of elements based on max shadow depth", async () => {
   const el = await fixture("<shadow-root-3></shadow-root-3>")
 
-  assert.equal(findAllElements(el, 1).length, 3)
-  assert.equal(findAllElements(el, 2).length, 6)
-  assert.equal(findAllElements(el, 3).length, 8)
+  assert.equal(findAllElements(el, { maxDepth:1}).length, 3)
+  assert.equal(findAllElements(el, { maxDepth:2}).length, 6)
+  assert.equal(findAllElements(el, { maxDepth:3}).length, 8)
 })
 
-test("Should grab the number of elements based on max shadow depth", async () => {
+test("Should grab the number of elements based on max shadow depth (complex)", async () => {
   const el = await fixture(`<div>
     <shadow-root-3></shadow-root-3>
     <shadow-root-2></shadow-root-2>
   </div>`)
 
-  assert.equal(findAllElements(el, 1).length, 8)
-  assert.equal(findAllElements(el, 2).length, 13)
-  assert.equal(findAllElements(el, 3).length, 15)
+  assert.equal(findAllElements(el, { maxDepth:1}).length, 8)
+  assert.equal(findAllElements(el, { maxDepth:2}).length, 13)
+  assert.equal(findAllElements(el, { maxDepth:3}).length, 15)
 })
-
-
