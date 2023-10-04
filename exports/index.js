@@ -56,14 +56,14 @@ function walk (container, options, depth = 0) {
    */
   let nodes = []
 
+  nodes.push(container);
+
   // If filter is provided, check if this container should be explored
   if (options.filter) {
     if (!options.filter(container)) {
       return /** @type {T} */ (nodes);
     }
   }
-
-  nodes.push(container)
 
   // @ts-expect-error
   const children = Array.from(container[options.propertyKey])
