@@ -1,8 +1,8 @@
 // @ts-check
 
 /**
- * @typedef {Element | DocumentFragment | ShadowRoot | Node} NodesContainer
- * @typedef {Document | DocumentFragment | ShadowRoot | Element | HTMLIFrameElement} ElementsContainer
+ * @typedef {Element | DocumentFragment | ShadowRoot | Node | HTMLSlotElement} NodesContainer
+ * @typedef {Document | DocumentFragment | ShadowRoot | Element | HTMLIFrameElement | HTMLSlotElement } ElementsContainer
  */
 
 /**
@@ -81,6 +81,22 @@ function walk (container, options, depth = 0) {
       depth++;
 
       nodes = nodes.concat(walk(container.contentDocument.documentElement, options, depth));
+    }
+  }
+
+  if (options.propertyKey === 'childNodes' && "assignedNodes" in container && container.assignedNodes().length) {
+    depth++;
+    let slotNodes = [...container.assignedNodes()];
+    for (const n of slotNodes) {
+      nodes = nodes.concat(walk(n, options, depth));
+    }    
+  }
+  
+  if (options.propertyKey === 'children' && "assignedElements" in container && container.assignedElements().length) {
+    depth++;
+    let slotElems = [...container.assignedElements()];
+    for (const e of slotElems) {
+      nodes = nodes.concat(walk(e, options, depth));
     }
   }
 
